@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 
 {-what happens when you mutliply 3 5 9. Well, programitcall, it would look like this:
@@ -60,3 +61,72 @@ quicksort (x:xs) =
     let smallerSorted = quicksort (filter (<=x) xs)  
         biggerSorted = quicksort (filter (>x) xs)   
     in  smallerSorted ++ [x] ++ biggerSorted  
+
+    {-the following function is a Collatz function, this type of function
+    takes a natural number, if its even, divides it by 2. If its odd, 
+        then you multiply it by 3 and add 1-}
+
+chain :: (Integral a) => a -> [a]  
+chain 1 = [1]  
+{-Because the chains end at 1, that's the edge case. standard recursive function-}
+chain n  
+    | even n =  n:chain (n `div` 2)  
+    | odd n  =  n:chain (n*3 + 1)  
+
+{-first we map the chain function to [1..100] 
+Next we filter them by a predicate that checks if a lists length is longer than 15
+    When filtering is done, we'll see the remaining chains
+    
+    This function has a type of numLongChains :: Int because 
+    length returns an Int instead of a Num a for historical reasons. 
+    If we wanted to return a more general Num a, 
+    we could have used fromIntegral on the resulting length.
+    
+     -}
+numLongChains :: Int  
+numLongChains = length (filter isLong (map chain [1..100]))  
+    where isLong xs = length xs > 15  
+
+{-rather than using a where binding like we did above, we can use a lambda to pass it in the function-}
+numLongChains' :: Int  
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))  {-the expression returns a function that tells us whether the length of the list passed is greater than 5-}
+
+
+{-our first fold-}
+sum'' :: (Num a) => [a] -> a  
+sum'' xs = foldl (\acc x -> acc + x) 0 xs  
+{- \acc x -> acc + x is the binary function, 0 is the starting value and xs is the list that gets folded up-}
+
+{-elem with a fold on the left
+starting value and accumulator are boolean
+-}
+
+elem'' :: (Eq a) => a -> [a] -> Bool  
+elem'' y ys = foldl (\acc x -> if x == y then True else acc) False ys  
+
+
+
+
+
+
+maximum'' :: (Ord a) => [a] -> a  
+maximum'' = foldr1 (\x acc -> if x > acc then x else acc)  
+  
+{-value from our empty list We take a starting value of an empty list 
+and then approach our list from the left and just prepend to our accumulator. 
+In the end, we build up a reversed list. \acc x -> x : acc kind of looks like the : 
+function, only the parameters are flipped.-}
+reverse'' :: [a] -> [a]  
+reverse'' = foldl (\acc x -> x : acc) []  
+  
+product'' :: (Num a) => [a] -> a  
+product'' = foldr1 (*)  
+  
+filter'' :: (a -> Bool) -> [a] -> [a]  
+filter'' p = foldr (\x acc -> if p x then x : acc else acc) []  
+  
+head'' :: [a] -> a  {-you're better off using pattern matching but it can still be done with folds-}
+head'' = foldr1 (\x _ -> x)  
+  
+last'' :: [a] -> a  
+last'' = foldl1 (\_ x -> x) 
