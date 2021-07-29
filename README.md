@@ -24,3 +24,5 @@ https://www.youtube.com/results?search_query=Peter+Drake%2C+learn+you+a+Haskell
 https://tutorials.cardanoacademy.io/. You can install the plutus playground and test whatever Plutus projec you want! Not to mention, you can learning how to Stake ADA to rake in that cash.
 
 https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
+
+https://github.com/input-output-hk Plutus code.
