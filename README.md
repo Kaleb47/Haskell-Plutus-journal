@@ -25,7 +25,9 @@ https://tutorials.cardanoacademy.io/. You can install the plutus playground and 
 
 https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
 
-https://github.com/input-output-hk Plutus code.
+https://github.com/input-output-hk Plutus code examples.
+
+https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
 
 https://www.youtube.com/watch?v=TdpBqhlgqGI&list=PLF1Z-APd9zK7usPMx3LGMZEHrECUGodd3 Professor Graham Hutton has entire lectures on the Haskell programming language and gives very indepth explanations about the mathematical concepts that drive Haskell.
 
