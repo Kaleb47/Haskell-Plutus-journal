@@ -1,132 +1,138 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+{-# OPTIONS_GHC -Wno-deferred-out-of-scope-variables #-}
+map :: (a -> b) -> [a] -> [b]
+map f xs = [f x | x <- xs]
+--maps can be defined using list comprehensions
+
+--alternatively, you can define a map function through recursion
+map' :: (a -> b) -> [a] -> [b]
+map' f [] = []
+map' f (x:xs) = f x : map' f xs
 
 
-{-what happens when you mutliply 3 5 9. Well, programitcall, it would look like this:
-((multThree 3) 5) 9
-3 is applied to multThree first because they are separated by a space
-It looks like Polish notation, takes one function, 3, as a parameter and returns another function to 
-start the process all over again. so now its 15 * 9
--}
+--filter
+filter :: (a -> Bool) -> [a] -> [a] --the guard filters at things that satisfy the property
+filter p xs = [x | x <- xs, p x]
+--filters can be defined using list comprehensions
 
-multThree :: (Num a) => a -> a -> a -> a  
-multThree x y z = x * y * z  
+--and of course filters can be defined through recurison
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p (x:xs)
+    | p x       = x : filter' p xs --if the property is true, we're keeping it
+    | otherwise = filter' p xs --otherwise they filterr it
 
-{-if we call the function below with a 99 it returns a GT.
-    Comparre 100 returns functions that takes number and compares it with 100
+--fold example function
+sum :: Num p => [p] -> p
+sum [] = 0
+sum xs = foldr (+) 0 xs --sum (x:xs) =  x + sum xs
+
+product :: Num p => [p] -> p
+product [] =1
+product xs = foldr (*) 1 xs -- product (x:xs) = x * product xs
+
+and :: [a] -> Bool
+and [] = True
+and xs = foldr (&&) True a --and (x:xs) = x && and xs
+
+--foldr can also be used in recursion
+foldr' :: (a -> b -> b) -> b -> [a] -> b --
+foldr' f v [] = v --if you apply foldrr with a function f and you have a value, v, that is what you will return in the base case
+foldr' f v (x:xs) = f x (foldr' f v xs) --if you'r folding and you have function f and value v, you recursively fold the remainder of the list
+
+    --remember, summation is just foldr (+)
+
+    {-
+    sum [1,2,3]
+    =
+        foldr (+) 0 [1,2,3]
+    =
+        foldr (+)  0 (1:(2:(3:[])))
+    =
+        1+(2+(3+0))    
+    =
+        6
+
+        here we replace (:) by (+) and [] by 0
+
+
+        product [1,2,3]
+       =
+           foldr (*) 1 [1,2,3]
+       =
+           foldr (*) 1 (1:(2:(3:[])))    
+       =
+           1*(2*(3*1))      
+       =
+           6
+
+           Replace (:)  by (*) and [] by 1    
+    
+    Length can also be defined as a fold
+
+        length [1,2,3]
+    =
+        length (1:(2:(3:[])))    
+    =
+        1+(1+(1+0))
+    =
+        3
+
+        Replace each (:) by lambda_n->1+n and [] by 0
+        the function would take two parameters, the first one is _ and the second one is n and replace the empty list with 0
+
+        so length can be called like so
+
+        length = foldr (\_ n -> 1+n) 0
+
+        reverse can be defined by fold too like so
+
+        reverse = foldr (\x xs -> xs ++ [x]) []       
+
+        remember what append is used for
+
+        (++ ys) = foldr (:) ys replace each [] with ys 
+    
     -}
-compareWithHundred :: (Num a, Ord a) => a -> Ordering  
-compareWithHundred x = compare 100 x  
 
-{-this function below contains an infix that takes one parameter.
--}
-divideByTen :: (Floating a) => a -> a  
-divideByTen = (/10)  
+--the library function (.) returns the COMPOSITION of two functions as a single function
 
-{-in the type signature, the parantheses indicates that the first parameeter is a function
-the second parameter is something of the type and the return value is that same type
+(.) :: (b -> c) -> (a -> b) -> (a -> c)
+f . g = \x -> f (g x)
 
--}
-applyTwice :: (a -> a) -> a -> a  
-applyTwice f x = f (f x) 
+--you are simply applying one function after another
 
-{-this takes a function and two lists as parameters, joins the two lists by applying the function between corresponding
-elements-}
-zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]  {-first parameter is a function that takes two things and produces a third thing-}
-zipWith' _ [] _ = []  
-zipWith' _ _ [] = []  
-zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys  
+odd :: Int -> Bool
+odd = not Prelude.. even
+-- the ood function is simp0ly a composition of the not function after the even function
 
 
-{-this takes a function and returns the same function but flips the arguments-}
-flip' :: (a -> b -> c) -> (b -> a -> c)  
-flip' f = g  
-    where g x y = f y x  
+all :: (a -> Bool) -> [a] -> Bool 
+all p xs = Prelude.and [p x| x <- xs] --this function decides if any element in a list satisfies a given predicate
 
-{-applies a finction to the list returining it to the list-}
-map' :: (a -> b) -> [a] -> [b]  
-map' _ [] = []  
-map' f (x:xs) = f x : map' f xs  
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile p [] = []
+takeWhile p (x:xs)
+    | p x           = x : Prelude.takeWhile p xs
+    | otherwise = []
 
-{-filters, in this case, take predictes
-if p x evaluates to True the elements gets included in the list-}
-filter' :: (a -> Bool) -> [a] -> [a]  
-filter' _ [] = []  
-filter' p (x:xs)   
- | p x       = x : filter' p xs  
- | otherwise = filter' p xs  
+    --take while takes elements that satisfiy a predicate until it finds an element that doesn't until it stops
 
-quicksort :: (Ord a) => [a] -> [a]    
-quicksort [] = []    
-quicksort (x:xs) =     
-    let smallerSorted = quicksort (filter (<=x) xs)  
-        biggerSorted = quicksort (filter (>x) xs)   
-    in  smallerSorted ++ [x] ++ biggerSorted  
+    --dropwhile does the opposite
+{-
+    dropWhile :: (a -> Bool) -> [a] -> [a]
+    dropWhile p [] = []
+    dropWhile p (x:xs) 
+                | p x       = dropWhile p xs
+                | otherwise = x:xs
+                -}
 
-    {-the following function is a Collatz function, this type of function
-    takes a natural number, if its even, divides it by 2. If its odd, 
-        then you multiply it by 3 and add 1-}
+                {-
+                what are higher-order functions that returns as results better known as?
 
-chain :: (Integral a) => a -> [a]  
-chain 1 = [1]  
-{-Because the chains end at 1, that's the edge case. standard recursive function-}
-chain n  
-    | even n =  n:chain (n `div` 2)  
-    | odd n  =  n:chain (n*3 + 1)  
+                take :: Int -> ([a] -> [a])
 
-{-first we map the chain function to [1..100] 
-Next we filter them by a predicate that checks if a lists length is longer than 15
-    When filtering is done, we'll see the remaining chains
-    
-    This function has a type of numLongChains :: Int because 
-    length returns an Int instead of a Num a for historical reasons. 
-    If we wanted to return a more general Num a, 
-    we could have used fromIntegral on the resulting length.
-    
-     -}
-numLongChains :: Int  
-numLongChains = length (filter isLong (map chain [1..100]))  
-    where isLong xs = length xs > 15  
+                Express [f x | x <- xs, p x] using map and filter.
 
-{-rather than using a where binding like we did above, we can use a lambda to pass it in the function-}
-numLongChains' :: Int  
-numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))  {-the expression returns a function that tells us whether the length of the list passed is greater than 5-}
-
-
-{-our first fold-}
-sum'' :: (Num a) => [a] -> a  
-sum'' xs = foldl (\acc x -> acc + x) 0 xs  
-{- \acc x -> acc + x is the binary function, 0 is the starting value and xs is the list that gets folded up-}
-
-{-elem with a fold on the left
-starting value and accumulator are boolean
--}
-
-elem'' :: (Eq a) => a -> [a] -> Bool  
-elem'' y ys = foldl (\acc x -> if x == y then True else acc) False ys  
-
-
-
-
-
-
-maximum'' :: (Ord a) => [a] -> a  
-maximum'' = foldr1 (\x acc -> if x > acc then x else acc)  
-  
-{-value from our empty list We take a starting value of an empty list 
-and then approach our list from the left and just prepend to our accumulator. 
-In the end, we build up a reversed list. \acc x -> x : acc kind of looks like the : 
-function, only the parameters are flipped.-}
-reverse'' :: [a] -> [a]  
-reverse'' = foldl (\acc x -> x : acc) []  
-  
-product'' :: (Num a) => [a] -> a  
-product'' = foldr1 (*)  
-  
-filter'' :: (a -> Bool) -> [a] -> [a]  
-filter'' p = foldr (\x acc -> if p x then x : acc else acc) []  
-  
-head'' :: [a] -> a  {-you're better off using pattern matching but it can still be done with folds-}
-head'' = foldr1 (\x _ -> x)  
-  
-last'' :: [a] -> a  
-last'' = foldl1 (\_ x -> x) 
+                map f (filter p xs)
+                we're ranging over each value in the list that will only satisfy the property p
+                -}
