@@ -31,6 +31,6 @@ https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
 
  http://tinyurl.com/haskell-notts Graham Hutton has entire lectures on the Haskell programming language and gives very indepth explanations about the mathematical concepts that drive Haskell.
 
-http://tinyurl.com/haskell-notts2 Advanced function programming
+http://tinyurl.com/haskell-notts2 Advanced Haskell programming
 
 https://wiki.haskell.org/Haskell Wikipedia but for Haskell.
