@@ -34,3 +34,5 @@ https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
 http://tinyurl.com/haskell-notts2 Advanced Haskell programming
 
 https://wiki.haskell.org/Haskell Wikipedia but for Haskell.
+
+https://www.youtube.com/playlist?list=PLJ3w5xyG4JWmBVIigNBytJhvSSfZZzfTm IOHK Haskell workshop in Mongolio
