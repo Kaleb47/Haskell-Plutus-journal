@@ -25,6 +25,8 @@ https://tutorials.cardanoacademy.io/. You can install the plutus playground and 
 
 https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
 
+https://iohk.io/en/blog/posts/2021/04/13/plutus-what-you-need-to-know/ This Blog explains how Plutus works.
+
 https://github.com/input-output-hk Plutus code examples.
 
 https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
