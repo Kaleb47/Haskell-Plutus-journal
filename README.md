@@ -18,8 +18,7 @@ https://m.youtube.com/watch?v=d5ANRngQ_YE -  President of Cardano, Charles Hoski
 
 http://learnyouahaskell.com/chapters - Learn you a Haskell
 
-I also recommend looking up Peter Drake's videos on Youtube because he summarizes chapters in the book. 
-https://www.youtube.com/results?search_query=Peter+Drake%2C+learn+you+a+Haskell
+https://www.youtube.com/channel/UCcAwSpbpQDDzEDRQqcDH8Iw this is an archive of all the Plutus Pioneer lectures so far!
 
 https://tutorials.cardanoacademy.io/. You can install the plutus playground and test whatever Plutus projec you want! Not to mention, you can learning how to Stake ADA to rake in that cash.
 
