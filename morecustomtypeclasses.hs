@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 --Algebraic Data Types
 
 data Bool = False | True  
@@ -209,4 +210,241 @@ data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
 
 -- [Char] and String are interchangeable
 
+-- remember that the type keyword is not used to make anything new but is used to make type synonyms
 
+type String = [Char]  
+
+--this improves the readability of functions
+{-
+type PhoneNumber = String  
+type Name = String  
+type PhoneBook = [(Name,PhoneNumber)]  
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool  
+inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook  
+
+Doesn't that make the type signature so much easier to read!
+
+
+
+
+Fonzie says: Aaay! When I talk about concrete types I mean like fully applied types like Map Int String 
+or if we're dealin' with one of them polymorphic functions, [a] or (Ord a) => Maybe a and stuff. 
+And like, sometimes me and the boys say that Maybe is a type, but we don't mean that, cause every idiot knows Maybe is a type constructor. 
+When I apply an extra type to Maybe, like Maybe String, then I have a concrete type. You know, values can only have types that are concrete types! 
+So in conclusion, live fast, love hard and don't let anybody else use your comb!
+
+
+IntMap type constructor takes one parameter and that is the type of what the integers will point to.
+
+
+Oh yeah. If you're going to try and implement this, 
+you'll probably going to do a qualified import of Data.Map. 
+When you do a qualified import, type constructors also have to be preceeded with a module name. 
+So you'd write type IntMap = Map.Map Int.
+-}
+
+--The Data type Either a b takes two parameters
+
+data Either a b = Left a | Right b deriving (Eq, Ord, Read, Show)  
+
+--We can pattern match on both the Left and Right
+
+--Let's see this in action
+
+{-
+import qualified Data.Map as Map  
+  
+data LockerState = Taken | Free deriving (Show, Eq)  
+  
+type Code = String  
+  
+type LockerMap = Map.Map Int (LockerState, Code) 
+
+lockerLookup :: Int -> LockerMap -> Either String Code  
+lockerLookup lockerNumber map =   
+    case Map.lookup lockerNumber map of   
+        Nothing -> Left $ "Locker number " ++ show lockerNumber ++ " doesn't exist!"  
+        Just (state, code) -> if state /= Taken   
+                                then Right code  
+                                else Left $ "Locker " ++ show lockerNumber ++ " is already taken!"  
+
+
+-}
+
+
+-- RECURSIVE DATA STRUCTURES --
+
+--We can make types whose constructors have field that are the same type
+
+--Same goes for a list like 3:(4:(5:6:[])), 
+--which could be written either like that or like 3:4:5:6:[] 
+--(because : is right-associative) or [3,4,5,6].
+
+--We can use algebraic datatypes to implement our own list
+
+-- data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)  
+
+-- data List a = Empty | Cons { listHead :: a, listTail :: List a} deriving (Show, Read, Eq, Ord)  
+
+--the Cons constructor above is simply : which takes a value and another list and returns another list
+
+-- We called our Cons constructor in an infix manner so you can see how it's just like :. 
+--Empty is like [] and 4 `Cons` (5 `Cons` Empty) is like 4:(5:[])
+
+--We can define functions to be automatically infix by making them comprised of only special characters. 
+--We can also do the same with constructors, since they're just functions that return a data type
+
+infixr 5 :-:  
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)  
+
+--fixity declarations are used for making your own operator
+--operators are used inm infix notation by default
+--infixr right associative
+--the number represents how it binds to the operands, you are picking your order of operrations
+
+{-
+
+infixr 5  .++  
+(.++) :: List a -> List a -> List a   
+Empty .++ ys = ys  
+(x :-: xs) .++ ys = x :-: (xs .++ ys)  
+
+ghci> let a = 3 :-: 4 :-: 5 :-: Empty  
+ghci> let b = 6 :-: 7 :-: Empty  
+ghci> a .++ b  
+(:-:) 3 ((:-:) 4 ((:-:) 5 ((:-:) 6 ((:-:) 7 Empty))))  
+-}
+
+infixr 5  .++  
+(.++) :: List a -> List a -> List a   
+Empty .++ ys = ys  
+(x :-: xs) .++ ys = x :-: (xs .++ ys)  
+
+--we can pattern match :-: because pattern matching is about matching constructors
+
+--What the heck is binary search tree?
+--https://en.wikipedia.org/wiki/Binary_search_tree
+--according to the wikipedia page, it is data stored in such a way where each node has more data than the last
+
+data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Read, Eq) 
+
+--now lets make a function that takes a tree and returns an element
+--in haskell, we can't modify our tree
+
+--the first function below is a singleton function for making a single node
+singleton :: a -> Tree a  
+singleton x = Node x EmptyTree EmptyTree 
+
+-- the following function inserts an element into a tree
+treeInsert :: (Ord a) => a -> Tree a -> Tree a  
+treeInsert x EmptyTree = singleton x  
+treeInsert x (Node a left right)   
+    | x == a = Node x left right  
+    | x < a  = Node a (treeInsert x left) right  
+    | x > a  = Node a left (treeInsert x right) 
+
+-- TYPECLASSES 102 --
+
+--we've learned how to automatically take our own type instances of the standard type classes by asking Haskell to derive the instances for us
+
+--remember, typeclasses are like interfaces with specific behaviors
+
+--This is how the Eq type class is defined in the standard Prelude
+{-
+class Eq a where  
+    (==) :: a -> a -> Bool  
+    (/=) :: a -> a -> Bool  
+    x == y = not (x /= y)  
+    x /= y = not (x == y)  
+
+We're defining a new typeclass that is called Eq
+
+Some people might understand this better if 
+    we wrote class Eq equatable where and then specified 
+    the type declarations like (==) :: equatable -> equatable -> Bool
+
+If we have say class Eq a where and then define a type declaration within that class like 
+(==) :: a -> -a -> Bool, then when we examine the type of that function later on, 
+it will have the type of (Eq a) => a -> a -> Bool.
+
+data TrafficLight = Red | Yellow | Green  
+
+Now let's derive an instance from Eq
+
+instance Eq TrafficLight where  
+    Red == Red = True  
+    Green == Green = True  
+    Yellow == Yellow = True  
+    _ == _ = False 
+
+ this is possible through the instance keyword
+
+ class Eq a where  
+    (==) :: a -> a -> Bool  
+    (/=) :: a -> a -> Bool  
+
+    we implemented == by simply doing pattern matching as you can see above
+
+    instance Show TrafficLight where  
+    show Red = "Red light"  
+    show Yellow = "Yellow light"  
+    show Green = "Green light"  
+--------REVIEW THIS LATER----------
+
+--- A YES-NO TYPECLASS ---
+
+class YesNo a where  
+    yesno :: a -> Bool
+
+ normally a bool function is preferable but this is a java like implementation
+
+ now we can implement instances   
+
+ instance YesNo Int where  
+    yesno 0 = False  
+    yesno _ = True  
+
+    epmty strings represent no and non-empty strings represent yes
+
+    instance YesNo [a] where  
+    yesno [] = False  
+    yesno _ = True
+
+    instance YesNo (Tree a) where  
+    yesno EmptyTree = False  
+    yesno _ = True  
+
+yesnoIf :: (YesNo y) => y -> a -> a -> a  
+yesnoIf yesnoVal yesResult noResult = if yesno yesnoVal then yesResult else noResult  
+
+-}
+
+-- FUNCTORS --
+
+--is like a map accept it applies functions to elements that are lists
+
+class Functor f where  
+    fmap :: (a -> b) -> f a -> f b
+
+ -- this is how to implement it
+
+ --It takes a function from one type to another and a list of one type and returns a list of another type
+{-
+ instance Functor [] where  
+    fmap = map     
+    
+    instance Functor Tree where  
+    fmap f EmptyTree = EmptyTree  
+    fmap f (Node x leftsub rightsub) = Node (f x) (fmap f leftsub) (fmap f rightsub)  
+
+    -}
+
+    --The Functor typeclass wants a type constructor that takes only one type parameter but Either takes two.
+{-
+    instance Functor (Either a) where  
+    fmap f (Right x) = Right (f x)  
+    fmap f (Left x) = Left x  
+    -}
+
+    
