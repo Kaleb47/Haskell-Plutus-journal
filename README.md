@@ -20,6 +20,8 @@ http://learnyouahaskell.com/chapters - Learn you a Haskell
 
 https://www.youtube.com/channel/UCcAwSpbpQDDzEDRQqcDH8Iw this is an archive of all the Plutus Pioneer lectures so far!
 
+https://cardano.stackexchange.com The Cardano Stack Exchange!
+
 https://tutorials.cardanoacademy.io/. You can install the plutus playground and test whatever Plutus projec you want! Not to mention, you can learning how to Stake ADA to rake in that cash.
 
 https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
