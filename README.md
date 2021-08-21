@@ -22,7 +22,7 @@ https://www.youtube.com/channel/UCcAwSpbpQDDzEDRQqcDH8Iw this is an archive of a
 
 https://cardano.stackexchange.com The Cardano Stack Exchange!
 
-https://tutorials.cardanoacademy.io/. You can install the plutus playground and test whatever Plutus projec you want! Not to mention, you can learning how to Stake ADA to rake in that cash.
+https://docs.plutus-community.com/ This is documetation on how to set up Plutus on your local environment. For Apple Silicon users, YOU MUST download Rosetta first and setup your dependencies in an Intel-based VS Code. The reason for this because IOHK does not have M1-compatible dependencies yet.
 
 https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
 
@@ -37,3 +37,7 @@ https://www.youtube.com/channel/UCBDp7ydYTHi1dh4Gnf3VTPA Professsor Graham Hutto
 https://wiki.haskell.org/Haskell Wikipedia but for Haskell.
 
 https://www.youtube.com/playlist?list=PLJ3w5xyG4JWmBVIigNBytJhvSSfZZzfTm IOHK Haskell workshop in Mongolia.
+
+https://discord.gg/W6mhZeRB This is the IOHK discord. Even if you're not in the Plutus Pioneer program, these guys are super chill and they will help you with whatever you need! :)
+
+https://www.reddit.com/r/CardanoDevelopers/ This is a link to the Cardano Developer subreddit!
