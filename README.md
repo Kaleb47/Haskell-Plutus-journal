@@ -30,6 +30,8 @@ https://iohk.io/en/blog/posts/2021/04/13/plutus-what-you-need-to-know/ This Blog
 
 https://github.com/input-output-hk Plutus code examples.
 
+https://github.com/input-output-hk/plutus-pioneer-program This is the github for the plutus pioneer program, they have homework assignments and lecture notes for you to use!
+
 https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
 
 https://www.youtube.com/channel/UCBDp7ydYTHi1dh4Gnf3VTPA Professsor Graham Hutton's lectures on Haskell.
