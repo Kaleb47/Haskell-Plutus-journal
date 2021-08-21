@@ -43,3 +43,5 @@ https://www.youtube.com/playlist?list=PLJ3w5xyG4JWmBVIigNBytJhvSSfZZzfTm IOHK Ha
 https://discord.gg/W6mhZeRB This is the IOHK discord. Even if you're not in the Plutus Pioneer program, these guys are super chill and they will help you with whatever you need! :)
 
 https://www.reddit.com/r/CardanoDevelopers/ This is a link to the Cardano Developer subreddit!
+
+https://www.reddit.com/r/haskell/ Haskell subreddit!
