@@ -17,8 +17,7 @@ https://m.youtube.com/watch?v=d5ANRngQ_YE -  President of Cardano, Charles Hoski
 ## Resources
 
 http://learnyouahaskell.com/chapters - Learn you a Haskell
-
-https://www.youtube.com/channel/UCcAwSpbpQDDzEDRQqcDH8Iw this is an archive of all the Plutus Pioneer lectures so far!
+https://www.youtube.com/channel/UCX9j__vYOJu00iqBrCzecVw this is an archive of all the Plutus Pioneer lectures so far!
 
 https://cardano.stackexchange.com The Cardano Stack Exchange!
 
