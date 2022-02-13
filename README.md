@@ -8,44 +8,43 @@ The purpose of this journal is to learn how to write high-assurance smart contra
 
 Because I'm too busy to explain why we're developing on Cardano, watch these videos for your own education and amusement:
 
-https://www.youtube.com/watch?v=GupSfja8gMc - Eric Manganaro explains why the killer app of Haskell is plutus contracts.
+ [Eric Manganaro](https://www.youtube.com/watch?v=GupSfja8gMc)  explains why the killer app of Haskell is plutus contracts.
 
-https://m.youtube.com/watch?v=HoH__7mLA1w - Hasan Michael giving a broad overview of the Cardano Blockchain.
+[Hasan Michael](https://m.youtube.com/watch?v=HoH__7mLA1w) giving a broad overview of the Cardano Blockchain.
 
-https://m.youtube.com/watch?v=d5ANRngQ_YE -  President of Cardano, Charles Hoskinson, explains how unbanked countries will be the leading customer base for DeFi.
+President of Cardano, [Charles Hoskinson](https://m.youtube.com/watch?v=d5ANRngQ_YE), explains how unbanked countries will be the leading customer base for DeFi.
 
 ## Resources
 
-http://learnyouahaskell.com/chapters - Learn you a Haskell
+ [Learn you a Haskell](http://learnyouahaskell.com/chapters)
 
 [FP Discord](https://discord.gg/zpDJjRZr)
 
 [Gimbalabs project based learning](https://discord.gg/W8Ra69Um)
 
-https://www.youtube.com/channel/UCX9j__vYOJu00iqBrCzecVw this is an archive of all the Plutus Pioneer lectures so far!
+ this is an archive of all the [Plutus Pioneer](https://www.youtube.com/channel/UCX9j__vYOJu00iqBrCzecVw) lectures so far!
 
-https://cardano.stackexchange.com The Cardano Stack Exchange!
+ The [Cardano Stack Exchange](https://cardano.stackexchange.com)!
 
-https://docs.plutus-community.com/ This is documetation on how to set up Plutus on your local environment. For Apple Silicon users, YOU MUST download Rosetta first and setup your dependencies in an Intel-based VS Code. The reason for this because IOHK does not have M1-compatible dependencies yet.
+[This is documetation on how to set up Plutus on your local environment. For Apple Silicon users, YOU MUST download Rosetta first and setup your dependencies in an Intel-based VS Code. The reason for this because IOHK does not have M1-compatible dependencies yet](https://docs.plutus-community.com/).
 
-https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf this is a PDF file of all the Haskell operators and what they mean.
+[this is a PDF file of all the Haskell operators and what they mean](https://imada.sdu.dk/~rolf/Edu/DM22/F06/haskell-operatorer.pdf).
 
-https://iohk.io/en/blog/posts/2021/04/13/plutus-what-you-need-to-know/ This Blog explains how Plutus works.
+[This Blog explains how Plutus works](https://iohk.io/en/blog/posts/2021/04/13/plutus-what-you-need-to-know/).
 
-https://github.com/input-output-hk Plutus code examples.
+[Plutus code examples](https://github.com/input-output-hk).
 
-https://github.com/input-output-hk/plutus-pioneer-program This is the github for the plutus pioneer program, they have homework assignments and lecture notes for you to use!
+[This is the github for the plutus pioneer program, they have homework assignments and lecture notes for you to use!](https://github.com/input-output-hk/plutus-pioneer-program) 
 
-https://developers.cardano.org/docs/get-started/ Cardano Developer tools.
+ [Cardano Developer tools](https://developers.cardano.org/docs/get-started/).
 
-https://www.youtube.com/channel/UCBDp7ydYTHi1dh4Gnf3VTPA Professsor Graham Hutton's lectures on Haskell.
+[Professsor Graham Hutton's lectures on Haskell](https://www.youtube.com/channel/UCBDp7ydYTHi1dh4Gnf3VTPA).
 
-https://wiki.haskell.org/Haskell Wikipedia but for Haskell.
+[WikiHaskell](https://wiki.haskell.org/Haskell).
 
-https://www.youtube.com/playlist?list=PLJ3w5xyG4JWmBVIigNBytJhvSSfZZzfTm IOHK Haskell workshop in Mongolia.
 
-https://discord.gg/W6mhZeRB This is the IOHK discord. Even if you're not in the Plutus Pioneer program, these guys are super chill and they will help you with whatever you need! :)
+ This is the [IOHK discord](https://discord.gg/W6mhZeRB). Even if you're not in the Plutus Pioneer program, these guys are super chill and they will help you with whatever you need! :)
 
-https://www.reddit.com/r/CardanoDevelopers/ This is a link to the Cardano Developer subreddit!
+This is a link to the [Cardano Developer subreddit](https://www.reddit.com/r/CardanoDevelopers/)!
 
-https://www.reddit.com/r/haskell/ Haskell subreddit!
+[Haskell subreddit](https://www.reddit.com/r/haskell/)!
